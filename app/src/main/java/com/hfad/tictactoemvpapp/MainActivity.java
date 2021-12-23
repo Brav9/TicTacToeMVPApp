@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button[][] buttons = new Button[3][3];
+    private final Button[][] buttons = new Button[3][3];
 
     private boolean player1Turn = true;
 
@@ -54,15 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!((Button) view).getText().toString().equals("")) {
             return;
         }
-
         if (player1Turn) {
             ((Button) view).setText("x");
         } else {
             ((Button) view).setText("0");
         }
-
         roundCount++;
-
         if (checkForWin()) {
             if (player1Turn) {
                 player1Wins();
@@ -109,22 +106,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return false;
-
     }
 
     private void player1Wins() {
-
         player1Points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Player One wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
-
-
     }
 
     private void player2Wins() {
         player2Points++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Player Two wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
@@ -135,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updatePointsText() {
-        textViewPlayer1.setText("Player 1: " + player1Points);
-        textViewPlayer2.setText("Player 2: " + player2Points);
+        textViewPlayer1.setText("Player One: " + player1Points);
+        textViewPlayer2.setText("Player Two: " + player2Points);
     }
 
     private void resetBoard() {
@@ -159,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onSaveInstanceState(@Nullable Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+
         savedInstanceState.putInt("roundCount", roundCount);
         savedInstanceState.putInt("player1Points", player1Points);
         savedInstanceState.putInt("player2points", player2Points);
